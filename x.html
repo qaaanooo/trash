@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Form</title>
+</head>
+<body>
+    <h1>Input XSS Payload</h1>
+    <form action="#" method="POST">
+        <label for="xssPayload">XSS Payload:</label><br>
+        <input type="text" id="xssPayload" name="xssPayload"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $payload = $_POST["xssPayload"];
+        echo "<h2>Result:</h2>";
+        echo "<p>Your XSS Payload: <strong>" . htmlspecialchars($payload) . "</strong></p>";
+        echo "<script>console.log('XSS Payload: $payload');</script>";
+    }
+    ?>
+</body>
+</html>
+
